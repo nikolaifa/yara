@@ -1,0 +1,9 @@
+---
+
+- name: yara | check version
+  command: yara --version
+  ignore_errors: yes
+  register: yara_present
+
+- include: yara.yml
+  when: yara_present | failed
