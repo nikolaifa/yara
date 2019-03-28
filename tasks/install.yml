@@ -41,7 +41,7 @@
   become_method: sudo
   command: make install
   args:
-          chdir: "{{ yara_temp_dir }}"
+          chdir: "{{ yara_temp_dir }}/yara"
 
 - name: build yara python module
   become: yes
