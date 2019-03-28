@@ -20,7 +20,6 @@
   git:
           repo: https://github.com/VirusTotal/yara-python.git
           dest: "{{ yara_temp_dir }}"
-          version: "{{ yara_version }}"
           recursive: yes
 
 - name: yara bootstrap
