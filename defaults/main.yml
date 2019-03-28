@@ -1,4 +1,4 @@
 ---
 
 yara_version: "3.9.0"
-yara_temp_dir: "/tmp/yara"
+yara_temp_dir: /tmp/yara
