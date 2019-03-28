@@ -49,3 +49,14 @@
   command: python setup.py build install
   args:
           chdir: "{{ yara_temp_dir }}"
+
+- name: symlink yara
+  file:
+    src: "{{ yara_lib }}"
+    dest: "{{ yara_symlink_lib }}"
+    owner: root
+    group: root
+    state: link
+    mode: "u+rwx,g+rx,o+rx"
+  become: yes
+  become_user: root

@@ -15,3 +15,6 @@ yara_apt_requirements:
   - build-essential
   - make
   - gcc
+
+yara_lib: /usr/lib/libyara.so.3
+yara_symlink_lib: /lib64/libyara.so.3
