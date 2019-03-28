@@ -13,3 +13,5 @@ yara_apt_requirements:
   - libjansson-dev
   - libmagic-dev
   - build-essential
+  - make
+  - gcc
