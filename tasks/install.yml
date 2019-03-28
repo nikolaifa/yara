@@ -2,53 +2,45 @@
 
 - name: Install Yara requirements from apt
   become: yes
-  become_method: sudo
+  become_user: root
   package:
           name: "{{ yara_apt_requirements }}"
           state: latest
 
 - name: install git
   become: yes
-  become_method: sudo
+  become_user: root
   package:
           name: "git"
           state: latest
           
 - name: Download yara with git
   become: yes
-  become_method: sudo
+  become_user: root
   git:
           repo: https://github.com/VirusTotal/yara-python.git
           dest: "{{ yara_temp_dir }}"
           recursive: yes
 
-- name: yara bootstrap
-  become: yes
-  become_method: sudo
-  command: ./bootstrap.sh
-  args:
-          chdir: "{{ yara_temp_dir }}/yara"
 
-- name: yara configure
-  become: yes
-  become_method: sudo
-  command: ./configure
+- name: configure and build yara
+  shell: |
+    ./bootstrap.sh
+    ./configure --prefix=/usr
+    make && make install
   args:
-          chdir: "{{ yara_temp_dir }}/yara"
+    chdir: "{{ yara_temp_dir }}/yara"
+  become: yes
+  become_user: root
 
-- name: yara Make install
-  become: yes
-  become_method: sudo
-  command: make install
+- name: build and install yara-python
+  shell: |
+    python setup.py build --dynamic-linking
+    python setup.py install
   args:
-          chdir: "{{ yara_temp_dir }}/yara"
-
-- name: build yara python module
+    chdir: "{{remote_resource_prefix}}/yara-python"
   become: yes
-  become_method: sudo
-  command: python setup.py build install
-  args:
-          chdir: "{{ yara_temp_dir }}"
+  become_user: root
 
 - name: symlink yara
   file:

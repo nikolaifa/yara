@@ -6,4 +6,4 @@
   register: yara_present
 
 - include: install.yml
-  when: yara_present | failed
+  when: yara_present is failed
