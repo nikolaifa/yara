@@ -19,8 +19,8 @@
   become_method: sudo
   git:
           repo: https://github.com/VirusTotal/yara-python.git
-          dest: {{ yara_temp_dir }} 
-          version: {{ yara_version }}
+          dest: "{{ yara_temp_dir }}"
+          version: "{{ yara_version }}"
           recursive: yes
 
 - name: yara bootstrap
@@ -28,25 +28,25 @@
   become_method: sudo
   command: ./yara/bootstrap.sh
   args:
-          chdir: {{ yara_temp_dir }}
+          chdir: "{{ yara_temp_dir }}"
 
 - name: yara configure
   become: yes
   become_method: sudo
   command: ./configure
   args:
-          chdir: {{ yara_temp_dir }}
+          chdir: "{{ yara_temp_dir }}"
 
 - name: yara Make install
   become: yes
   become_method: sudo
   command: make install
   args:
-          chdir: {{ yara_temp_dir }}
+          chdir: "{{ yara_temp_dir }}"
 
 - name: build yara python module
   become: yes
   become_method: sudo
   command: python setup.py build install
   args:
-          chdir: {{ yara_temp_dir }}
+          chdir: "{{ yara_temp_dir }}"
