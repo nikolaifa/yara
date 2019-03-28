@@ -28,21 +28,21 @@
   become_method: sudo
   command: ./yara/bootstrap.sh
   args:
-          chdir: "{{ yara_temp_dir }}"/yara
+          chdir: {{ yara_temp_dir }}
 
 - name: yara configure
   become: yes
   become_method: sudo
   command: ./configure
   args:
-          chdir: {{ yara_temp_dir }}/yara
+          chdir: {{ yara_temp_dir }}
 
 - name: yara Make install
   become: yes
   become_method: sudo
   command: make install
   args:
-          chdir: "{{ yara_temp_dir }}"/yara
+          chdir: {{ yara_temp_dir }}
 
 - name: build yara python module
   become: yes
