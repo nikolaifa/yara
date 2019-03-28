@@ -2,3 +2,14 @@
 
 yara_version: "3.9.0"
 yara_temp_dir: /tmp/yara
+yara_apt_requirements:
+  - libpcre3
+  - libpcre3-dev
+  - libtool
+  - automake
+  - autoconf
+  - python-dev
+  - libssl-dev
+  - libjansson-dev
+  - libmagic-dev
+  - build-essential
