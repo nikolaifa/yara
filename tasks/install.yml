@@ -38,7 +38,7 @@
     python setup.py build --dynamic-linking
     python setup.py install
   args:
-    chdir: "{{remote_resource_prefix}}/yara-python"
+    chdir: "{{ yara_temp_dir }}/yara"
   become: yes
   become_user: root
 
