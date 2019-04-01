@@ -1,54 +1,26 @@
 ---
 
-- name: Install Yara requirements from apt
-  become: yes
-  become_user: root
-  package:
-          name: "{{ yara_apt_requirements }}"
-          state: latest
-
-- name: install git
-  become: yes
-  become_user: root
-  package:
-          name: "git"
-          state: latest
-          
-- name: Download yara with git
-  become: yes
-  become_user: root
-  git:
-          repo: https://github.com/VirusTotal/yara-python.git
-          dest: "{{ yara_temp_dir }}"
-          recursive: yes
-
-
-- name: configure and build yara
-  shell: |
-    ./bootstrap.sh
-    ./configure --prefix=/usr
-    make && make install
-  args:
-    chdir: "{{ yara_temp_dir }}/yara"
+- name: Yara | Install package
+  apt: name=yara state=latest
   become: yes
   become_user: root
 
-- name: build and install yara-python
-  shell: |
-    python setup.py build --dynamic-linking
-    python setup.py install
-  args:
-    chdir: "{{ yara_temp_dir }}"
-  become: yes
-  become_user: root
+- name: pip3 check if exists
+  command: pip3 --version
+  ignore_errors: yes
+  register: pip3_present
 
-- name: symlink yara
-  file:
-    src: "{{ yara_lib }}"
-    dest: "{{ yara_symlink_lib }}"
-    owner: root
-    group: root
-    state: link
-    mode: "u+rwx,g+rx,o+rx"
+- name: Install yara python module
   become: yes
   become_user: root
+  pip:
+    name: yara-python
+    state: latest
+    executable: pip3
+    extra_args: "{{ pip_extra_args | default('') }}"
+  when: pip3_present is success
+
+- name: TMP Yara | add rules
+  get_url:
+    url: "{{ yara_rules_url }}"
+    dest: "{{ yara_rules_path }}"

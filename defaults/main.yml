@@ -1,22 +1,4 @@
 ---
 
-yara_version: "3.9.0"
-yara_temp_dir: /tmp/yara
-yara_apt_requirements:
-  - libpcre3
-  - libpcre3-dev
-  - libtool
-  - automake
-  - autoconf
-  - python-dev
-  - libssl-dev
-  - libjansson-dev
-  - libmagic-dev
-  - build-essential
-  - make
-  - gcc
-  - python-setuptools
-  - python3-setuptools
-
-yara_lib: /usr/lib/libyara.so.3
-yara_symlink_lib: /lib64/libyara.so.3
+yara_rules_url: https://raw.githubusercontent.com/Yara-Rules/rules/master/Antidebug_AntiVM/antidebug_antivm.yar
+yara_rules_path: /opt/irma/yara_rules/yara_rules.yar
