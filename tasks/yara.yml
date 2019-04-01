@@ -2,16 +2,17 @@
 
 - name: Yara | Install package
   apt: name=yara state=latest
+  become: yes
+  become_user: root
 
 - name: pip3 check if exists
   command: pip3 --version
   ignore_errors: yes
   register: pip3_present
 
-
-  
-
 - name: Install yara python module
+  become: yes
+  become_user: root
   pip:
     name: yara-python
     state: latest
