@@ -37,6 +37,8 @@
   shell: |
     python setup.py build --dynamic-linking
     python setup.py install
+    python3 setup.py build --dynamic-linking
+    python3 setup.py install
   args:
     chdir: "{{ yara_temp_dir }}"
   become: yes
