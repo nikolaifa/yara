@@ -5,5 +5,5 @@
   ignore_errors: yes
   register: yara_present
 
-- include: install.yml
+- include: yara.yml
   when: yara_present is failed

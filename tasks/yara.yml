@@ -1,30 +1,20 @@
 ---
 
-- name: Install Yara
-  become: yes
-  become_method: sudo
-  package:
-          name: "yara"
-          state: latest
+- name: Yara | Install package
+  apt: name=yara state=latest
 
-- name: install git
-  become: yes
-  become_method: sudo
-  package:
-          name: "git"
-          state: latest
-          
-- name: Download yara with git
-  become: yes
-  become_method: sudo
-  git:
-          repo: https://github.com/VirusTotal/yara-python.git
-          dest: "{{ yara_temp_dir }}"
-          recursive: yes
+- name: pip3 check if exists
+  command: pip3 --version
+  ignore_errors: yes
+  register: pip3_present
 
-- name: build yara python module
-  become: yes
-  become_method: sudo
-  command: python setup.py build install
-  args:
-          chdir: "{{ yara_temp_dir }}"
+
+  
+
+- name: Install yara python module
+  pip:
+    name: yara-python
+    state: latest
+    executable: pip3
+    extra_args: "{{ pip_extra_args | default('') }}"
+  when: pip3_present is success
