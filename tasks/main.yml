@@ -1,6 +1,6 @@
 ---
 
-- name: yara | check version
+- name: yara is check version
   command: yara --version
   ignore_errors: yes
   register: yara_present
