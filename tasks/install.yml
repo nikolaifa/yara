@@ -31,3 +31,5 @@
   get_url:
     url: "{{ yara_rules_url }}"
     dest: "{{ yara_rules_path }}/yara_rules.yar"
+  become: yes
+  become_user: root
