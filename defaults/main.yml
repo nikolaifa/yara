@@ -1,4 +1,4 @@
 ---
 
 yara_rules_url: https://raw.githubusercontent.com/Yara-Rules/rules/master/Antidebug_AntiVM/antidebug_antivm.yar
-yara_rules_path: /opt/irma/yara_rules/yara_rules.yar
+yara_rules_path: /opt/irma/yara_rules

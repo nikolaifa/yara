@@ -20,7 +20,14 @@
     extra_args: "{{ pip_extra_args | default('') }}"
   when: pip3_present is success
 
+- name: Yara | create folders
+  file:
+    path: "{{ yara_rules_path }}"
+    state: directory
+  become: yes
+  become_user: root
+
 - name: TMP Yara | add rules
   get_url:
     url: "{{ yara_rules_url }}"
-    dest: "{{ yara_rules_path }}"
+    dest: "{{ yara_rules_path }}/yara_rules.yar"
