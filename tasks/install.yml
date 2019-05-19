@@ -5,10 +5,10 @@
   become: yes
   become_user: root
 
-- name: pip3 check if exists
-  command: pip3 --version
+- name: pip check if exists
+  command: pip --version
   ignore_errors: yes
-  register: pip3_present
+  register: pip_present
 
 - name: Install yara python module
   become: yes
@@ -16,9 +16,9 @@
   pip:
     name: yara-python
     state: latest
-    executable: pip3
+    executable: pip
     extra_args: "{{ pip_extra_args | default('') }}"
-  when: pip3_present is success
+  when: pip_present is success
 
 - name: Yara | create folders
   file:
